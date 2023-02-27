@@ -12,11 +12,9 @@ obj-y += embed_ksud.o
 obj-y += kernel_compat.o
 
 obj-y += selinux/
-# .git is a text file while the module is imported by 'git submodule add'.
-ifeq ($(shell test -e $(srctree)/$(src)/../.git; echo $$?),0)
-KSU_GIT_VERSION := $(shell cd $(srctree)/$(src); /usr/bin/env PATH="$$PATH":/usr/bin:/usr/local/bin git rev-list --count HEAD)
+# KernelSU @ b80cf7ba15b13173c4d07931bd0a66ec1a685d28
+KSU_GIT_VERSION := 630
 ccflags-y += -DKSU_GIT_VERSION=$(KSU_GIT_VERSION)
-endif
 
 ifndef EXPECTED_SIZE
 EXPECTED_SIZE := 0x033b
